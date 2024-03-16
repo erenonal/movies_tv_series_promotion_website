@@ -1,5 +1,5 @@
 <template>
-  <div>Vitalen</div>
+  <div>Vitalenn</div>
 </template>
 
 <script setup></script>
