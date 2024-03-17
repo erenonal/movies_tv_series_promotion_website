@@ -8,23 +8,14 @@
           :key="index"
           class="movie-card"
         >
-          <div class="imdb-button">{{ movie.rating }}</div>
-          <img
-            :src="movie.poster"
-            :alt="movie.title + ' poster'"
-            class="movie-poster"
-          />
-          <div class="movie-info-overlay">
-            <div class="movie-info">
-              <h1 class="movie-title">{{ movie.title }}</h1>
-            </div>
-          </div>
+          <ProductCard :movie="movie"> </ProductCard>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script setup>
+import ProductCard from "/src/components/ProductCard.vue";
 const props = defineProps(["movies", "header"]);
 </script>
 
@@ -32,12 +23,15 @@ const props = defineProps(["movies", "header"]);
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 
 .movie-container {
+  padding-top: 5rem;
   margin-inline-end: 1rem;
 }
 
 .main-header {
   color: crimson;
   display: block;
+  text-align: start;
+  font-size: 1.5rem;
 }
 
 .movie-slider {
@@ -59,8 +53,6 @@ const props = defineProps(["movies", "header"]);
   content: "";
   height: 25vh;
   display: block;
-  /*  width: 100px;
- background: linear-gradient(to left, black, transparent); */
   position: absolute;
   right: 0;
   top: 0;
@@ -102,12 +94,10 @@ const props = defineProps(["movies", "header"]);
   transition: all 1s;
 }
 
-/* Apply styles only to the first .movie-card element */
 .movie-card:first-child {
   margin-left: 0;
 }
 
-/* Apply styles only to the last .movie-card element */
 .movie-card:last-child {
   margin-right: 0;
 }
@@ -169,8 +159,8 @@ const props = defineProps(["movies", "header"]);
   right: 0;
   bottom: 0;
   display: flex;
-  background-color: rgba(168, 0, 194, 0.198); /* Adjust the opacity as needed */
-  opacity: 1; /* Initially hidden */
+  background-color: rgba(168, 0, 194, 0.198);
+  opacity: 1; 
   transition: opacity 0.3s ease;
 }
 </style>

@@ -46,7 +46,7 @@
 }
 
 .column {
-  margin-left: 20px; /* Adjust spacing between the columns */
+  margin-left: 20px;
 }
 
 @media (max-width: 768px) {
