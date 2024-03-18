@@ -72,5 +72,11 @@ const props = defineProps(["colorArr"]);
   .container {
     flex-direction: column;
   }
+  .left {
+    flex: 1;
+    text-align: center;
+    margin: auto;
+  }
+
 }
 </style>

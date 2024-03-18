@@ -1,5 +1,11 @@
 <template>
-  <div class="banner-background">
+  <div
+    class="banner-background"
+    :style="{
+      '--vitalen-white': colorArr['vitalen-white'],
+      '--vitalen-light': colorArr['vitalen-light-1'],
+    }"
+  >
     <div style="backdrop-filter: blur(5px); min-height: 100vh">
       <div v-if="movieDetails" class="banner">
         <div class="column">{{ movieDetails.name }}</div>
@@ -72,7 +78,7 @@
 <script setup>
 import { defineProps, ref, onMounted, watchEffect } from "vue";
 import CastSlider from "./CastSlider.vue"; // Import your component here
-
+import { colorArr } from "../composables/colorPalette";
 const props = defineProps(["movieDetails", "movieCasting"]);
 const startUrl = "https://image.tmdb.org/t/p/original";
 watchEffect(() => {
@@ -128,7 +134,7 @@ function formatDateWithSlashes(dateString) {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: var(--vitalen-white);
   overflow: hidden;
 }
 .detail-container {
@@ -141,9 +147,9 @@ function formatDateWithSlashes(dateString) {
 }
 
 .detail-item {
-  color: white;
+  color: var(--vitalen-white);
   line-height: 1.5;
-  border: solid 1px white;
+  border: solid 1px var(--vitalen-white);
   border-radius: 0 0 5rem 5rem;
   backdrop-filter: blur(200px);
   margin-top: -2rem;
@@ -162,31 +168,38 @@ function formatDateWithSlashes(dateString) {
   margin: auto;
   font-size: 3rem;
   text-align: center;
-  color: white;
+  color: var(--vitalen-white);
   padding: 2rem;
 }
 @media (max-width: 768px) {
   .detail-container {
     display: grid;
-    grid-template-columns: 1fr 1fr; 
-    grid-template-rows: auto auto auto; 
-    gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    width: 100%;
+    margin: auto;
+    gap: 0;
   }
-
+  .detail-item {
+    font-size: 0.8rem;
+    margin: 0;
+    border-radius: 0 0 2rem 2rem;
+    scale: 0.9;
+  }
   .detail-container > div:nth-child(3) {
     grid-column: 1 / -1;
   }
 }
 .responsive-paragraph {
-  color: white;
+  color: var(--vitalen-white);
   max-width: 80%;
-  padding: 2rem; 
-  margin: 0 auto; 
+  padding: 2rem;
+  margin: 0 auto;
   text-align: center;
 }
 
 .responsive-paragraph p {
-  margin: 0; 
+  margin: 0;
   font-size: 1.5rem;
 }
 
@@ -207,10 +220,10 @@ function formatDateWithSlashes(dateString) {
 }
 
 .slide {
-  flex: 0 0 auto; 
-  width: 15vh; 
+  flex: 0 0 auto;
+  width: 15vh;
   margin-right: 1rem;
-  margin-bottom: 2rem; 
+  margin-bottom: 2rem;
 }
 
 @media (max-width: 768px) {
@@ -224,11 +237,11 @@ function formatDateWithSlashes(dateString) {
 }
 
 .slider-container::-webkit-scrollbar-track {
-  background-color: #f1f1f1;
+  background-color: var(--vitalen-white);
 }
 
 .slider-container::-webkit-scrollbar-thumb {
-  background-color: #888;
+  background-color: var(--vitalen-light);
   border-radius: 2rem;
 }
 </style>

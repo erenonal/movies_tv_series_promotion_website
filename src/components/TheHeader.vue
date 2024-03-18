@@ -179,6 +179,18 @@ nav button:first-child {
   scale: 0.95;
 }
 
+@media (max-width: 768px) {
+  .row {
+    display: flex;
+    flex-wrap: nowrap; /* Ensure items stay in one row */
+    scale: 0.7;
+    margin-left: -3rem;
+    margin-top: -2rem;
+  }
+  .navbar {
+    width: 85%;
+  }
+}
 .column {
   flex: 1;
   max-width: 33%;

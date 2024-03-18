@@ -1,5 +1,4 @@
 <template>
-    
   <div class="content-container">
     <div class="image-row">
       <img src="../assets/anonim_pp.png" />
@@ -29,20 +28,33 @@ const context = ref("");
   align-items: center;
 }
 
+@media (max-width: 768px) {
+  .content-container {
+    scale: 0.75;
+  }
+  .text-row,
+  .context-row p {
+    text-align: center;
+    color: white;
+    font-weight: 900;
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide any overflow */
+  }
+}
 .image-row {
   margin-bottom: 10px;
 }
 
 .content-container img {
-  max-height: 100px; 
+  max-height: 100px;
   aspect-ratio: 1;
   border-radius: 50%;
 }
-
 .text-row,
 .context-row {
   text-align: center;
   color: white;
   font-weight: 900;
+  white-space: nowrap; /* Prevent text from wrapping */
 }
 </style>
