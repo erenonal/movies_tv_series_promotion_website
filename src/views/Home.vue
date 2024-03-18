@@ -4,6 +4,7 @@
       :id="fieldName"
       :movies="fieldName === 'Popular Movies' ? movies : tv"
       :header="fieldName"
+      :colorArr="colorArr"
     ></ProductSlider>
   </div>
 </template>
@@ -15,6 +16,7 @@ import ProductSlider from "/src/components/ProductSlider.vue";
 import { ref, watchEffect, toRaw } from "vue";
 import { fetchData } from "/src/composables/tmdb";
 import { useRouter } from 'vue-router';
+import { colorArr } from "../composables/colorPalette";
 
 const router = useRouter();
 const fieldNames = ["Popular Movies", "Popular TV Series"];

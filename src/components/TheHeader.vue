@@ -3,6 +3,11 @@
     <div
       class="navbar"
       :class="{ fixed: isNavbarFixed, navbar: !isNavbarFixed }"
+      :style="{
+        '--navbar-light': props.colorArr['vitalen-light-5'],
+        '--navbar-black': props.colorArr['vitalen-black'],
+        '--vitalen-navbar-gradient': props.colorArr['vitalen-navbar-gradient'],
+      }"
     >
       <div class="logo">LOGO</div>
       <nav>
@@ -44,7 +49,7 @@
 import { onMounted, reactive, defineProps, ref, watch, watchEffect } from "vue";
 import ProductCard from "/src/components/ProductCard.vue";
 const isNavbarFixed = ref(false);
-const props = defineProps(["ids", "popularMoviesAndSeries"]);
+const props = defineProps(["ids", "popularMoviesAndSeries", "colorArr"]);
 const contentType = ["movie", "tv"];
 const ctx = ref({});
 let randomIndexMovie = ref(0);
@@ -106,17 +111,17 @@ header::before {
   margin: 2rem;
   position: absolute;
   top: 0;
-  width: 90%;
+  width: 96%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background: linear-gradient(to right, #888, #222, transparent);
+  background: var(--vitalen-navbar-gradient);
   color: black;
 }
 
 .fixed {
-  width: 90%;
+  width: 96%;
   border-radius: 6px;
   margin: 2rem;
   top: 0;
@@ -124,7 +129,7 @@ header::before {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background: linear-gradient(to right, #888, #41404025);
+  background: var(--vitalen-navbar-gradient-mobile);
   color: black;
   position: fixed;
   top: 0;
@@ -135,6 +140,7 @@ header::before {
 
 .logo {
   font-size: 24px;
+  color: var(--vitalen-black);
 }
 
 nav button {
@@ -153,7 +159,7 @@ nav button {
   padding: 8px 16px;
   margin-left: 10px;
   background-color: transparent;
-  color: crimson;
+  color: var(--navbar-light);
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -166,7 +172,7 @@ nav button:first-child {
 .row {
   display: flex;
   flex-wrap: wrap;
-  width: 95%;
+  width: 100%;
   align-content: center;
   justify-content: space-between;
   margin-top: 8rem;
@@ -189,6 +195,7 @@ nav button:first-child {
 }
 .header-motto {
   margin-top: -3rem;
+  text-align: center;
 }
 @media (max-width: 768px) {
   .column {
@@ -198,5 +205,4 @@ nav button:first-child {
 .bold-text {
   font-weight: bold;
 }
-
 </style>

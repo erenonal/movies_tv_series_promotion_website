@@ -11,5 +11,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-
-
+.main-components {
+  margin: 60px 45px 22.5px;
+}

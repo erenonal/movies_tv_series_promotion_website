@@ -1,5 +1,13 @@
 <template>
-  <div class="movie-container">
+  <div
+    class="movie-container"
+    :style="{
+      '--vitalen-primary': props.colorArr['vitalen-dark-5'],
+      '--vitalen-secondary': props.colorArr['vitalen-light-1'],
+      '--vitalen-white': props.colorArr['vitalen-white'],
+      '--vitalen-opac-indigo': props.colorArr['vitalen-opac-indigo'],
+    }"
+  >
     <h1 class="main-header">{{ props.header }}</h1>
     <div class="movie-slider">
       <div class="movie-list">
@@ -20,7 +28,7 @@
 </template>
 <script setup>
 import ProductCard from "/src/components/ProductCard.vue";
-const props = defineProps(["movies", "header"]);
+const props = defineProps(["movies", "header", "colorArr"]);
 </script>
 
 <style scoped>
@@ -32,7 +40,7 @@ const props = defineProps(["movies", "header"]);
 }
 
 .main-header {
-  color: crimson;
+  color: var(--vitalen-primary);
   display: block;
   text-align: start;
   font-size: 1.5rem;
@@ -65,9 +73,9 @@ const props = defineProps(["movies", "header"]);
   display: flex;
   overflow-y: hidden;
   overflow-x: scroll;
-  padding-bottom: 1rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-bottom: 3rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 
   padding-top: 3rem;
 }
@@ -82,8 +90,8 @@ const props = defineProps(["movies", "header"]);
 }
 
 .movie-list::-webkit-scrollbar-thumb {
-  background-color: rgb(61, 61, 61);
-  outline: 1px solid slategrey;
+  background-color: var(--vitalen-primary);
+  outline: 1px solid var(--vitalen-secondary);
   border-radius: 50px;
 }
 
@@ -106,62 +114,11 @@ const props = defineProps(["movies", "header"]);
 .movie-card h1 {
   padding-top: 1rem;
   text-align: center;
-  color: #fff;
+  color: var(--vitalen-white);
   font-size: 1.25rem;
 }
 .movie-card:hover {
   transform: scale(1.08);
   border-radius: 10px 0px 10px 10px;
-}
-
-.movie-poster {
-  min-height: 250px;
-  height: 30vh;
-  border-radius: 10px 0px 10px 10px;
-}
-
-.movie-info {
-  height: 100%;
-  padding: 0px 10px;
-}
-
-.movie-title {
-  font-size: 2rem;
-  font-weight: 400;
-  letter-spacing: -1px;
-  padding-bottom: 1rem;
-}
-
-.imdb-button {
-  font-weight: 700;
-  background-color: blue;
-  padding: 2px 12px;
-  border-radius: 5px 5px 0 0;
-  border: 3px solid transparent;
-  color: white;
-  font-size: 1rem;
-  position: absolute;
-  right: 0;
-  height: 50px;
-  top: -9%;
-  z-index: -1;
-}
-
-.movie-info-overlay {
-  border-radius: 10px 0px 10px 10px;
-
-  height: max-content;
-  backdrop-filter: blur(5px);
-  text-align: center;
-  justify-content: center;
-  align-content: center;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  background-color: rgba(168, 0, 194, 0.198);
-  opacity: 1;
-  transition: opacity 0.3s ease;
 }
 </style>

@@ -1,33 +1,37 @@
 <template>
-    <div
-      v-if="movie"
-      class="movie-card"
-      @click="handleClick(movie.id, props.contentType)"
-    >
-      <div class="imdb-button">{{ movie.vote_average.toFixed(1) }} / 10</div>
-      <img
-        :src="`${startUrl}${movie.poster_path}`"
-        :alt="`{{ movie.name ? movie.name : movie.title }} poster`"
-        class="movie-poster"
-      />
-      <div class="movie-info-overlay">
-        <div class="movie-info">
-          <h1 class="movie-title">
-            {{ movie.name ? movie.name : movie.title }}
-          </h1>
-        </div>
+  <div
+    v-if="movie"
+    class="movie-card"
+    @click="handleClick(movie.id, props.contentType)"
+    :style="{
+      '--vitalen-primary': colorArr['vitalen-dark-5'],
+      '--vitalen-white': colorArr['vitalen-white'],
+      '--vitalen-opac-indigo': colorArr['vitalen-opac-indigo'],
+    }"
+  >
+    <div class="imdb-button">{{ movie.vote_average.toFixed(1) }} / 10</div>
+    <img
+      :src="`${startUrl}${movie.poster_path}`"
+      :alt="`{{ movie.name ? movie.name : movie.title }} poster`"
+      class="movie-poster"
+    />
+    <div class="movie-info-overlay">
+      <div class="movie-info">
+        <h1 class="movie-title">
+          {{ movie.name ? movie.name : movie.title }}
+        </h1>
       </div>
     </div>
-    <div v-else style="text-align: center; width: 30%">
-      <p>Loading...</p>
-    </div>
-    
+  </div>
+  <div v-else style="text-align: center; width: 30%">
+    <p>Loading...</p>
+  </div>
 </template>
 <script setup>
 import { ref } from "vue";
 import { fetchMovieDetails, fetchCasting } from "../composables/tmdb";
-import { useRouter } from 'vue-router';
-
+import { useRouter } from "vue-router";
+import { colorArr } from "../composables/colorPalette";
 const props = defineProps(["movie", "contentType"]);
 const startUrl = "https://image.tmdb.org/t/p/original";
 const movieDetails = ref({});
@@ -38,12 +42,14 @@ const handleClick = async (contentId, contentType) => {
   try {
     movieDetails.value = await fetchMovieDetails(contentId, contentType);
     movieCasting.value = await fetchCasting(contentId, contentType);
-    router.push({ name: 'movieDetails', params: { id: contentId , contentType: contentType } });
+    router.push({
+      name: "movieDetails",
+      params: { id: contentId, contentType: contentType },
+    });
   } catch (error) {
     console.error("Error fetching movie details or casting:", error);
   }
 };
-
 </script>
 
 <style scoped>
@@ -68,7 +74,7 @@ const handleClick = async (contentId, contentType) => {
 .movie-card h1 {
   padding-top: 1rem;
   text-align: center;
-  color: #fff;
+  color: var(--vitalen-white);
   font-size: 1.25rem;
 }
 .movie-card:hover {
@@ -96,11 +102,11 @@ const handleClick = async (contentId, contentType) => {
 
 .imdb-button {
   font-weight: 700;
-  background-color: blue;
+  background-color: var(--vitalen-primary);
   padding: 2px 12px;
   border-radius: 5px 5px 0 0;
   border: 3px solid transparent;
-  color: white;
+  color: var(--vitalen-white);
   font-size: 1rem;
   position: absolute;
   right: 0;
@@ -121,7 +127,7 @@ const handleClick = async (contentId, contentType) => {
   right: 0;
   bottom: 0;
   display: flex;
-  background-color: rgba(168, 0, 194, 0.198);
+  background-color: var(--vitalen-opac-indigo);
   opacity: 1;
   transition: opacity 0.3s ease;
 }
@@ -131,7 +137,7 @@ const handleClick = async (contentId, contentType) => {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); 
-  z-index: 999; 
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
 }
 </style>

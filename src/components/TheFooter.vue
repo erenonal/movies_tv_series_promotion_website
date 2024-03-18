@@ -1,15 +1,27 @@
 <template>
-  <footer class="footer">
+  <footer
+    class="footer"
+    :style="{
+      '--footer-background': props.colorArr['vitalen-dark-5'],
+      '--vitalen-white': props.colorArr['vitalen-white'],
+    }"
+  >
     <div class="container">
       <div class="left">
         <p>Eren ONAL</p>
       </div>
       <div class="right">
         <div class="column">
-          <a href="https://www.linkedin.com/in/onaleren/">LinkedIn</a>
+          <a
+            href="https://www.linkedin.com/in/onaleren/"
+            style="text-decoration: none"
+            >LinkedIn</a
+          >
         </div>
         <div class="column">
-          <a href="https://github.com/erenonal">Github</a>
+          <a href="https://github.com/erenonal" style="text-decoration: none"
+            >Github</a
+          >
         </div>
       </div>
     </div>
@@ -17,12 +29,14 @@
 </template>
 
 <script setup>
+import { defineProps } from "vue";
+const props = defineProps(["colorArr"]);
 </script>
 
 <style scoped>
 .footer {
-  background-color: crimson;
-  color: #fff;
+  background-color: var(--footer-background);
+  color: var(--vitalen-white);
   padding: 1rem 0;
   text-align: center;
 }
@@ -38,7 +52,7 @@
 .left {
   flex: 1;
   text-align: start;
-  margin-left: 5rem ;
+  margin-left: 5rem;
 }
 
 .right {
@@ -48,6 +62,10 @@
 .column {
   margin-left: 5rem;
   margin-right: 5rem;
+}
+.column a {
+  color: var(--vitalen-white);
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {

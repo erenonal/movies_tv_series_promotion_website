@@ -3,9 +3,13 @@
     v-if="isHomePage"
     :ids="fieldNames"
     :popularMoviesAndSeries="highRatingContext"
+    :colorArr="colorArr"
+    class="main-components"
   />
+  <div class="main-components">
     <router-view></router-view>
-  <Footer />
+  </div>
+  <Footer :colorArr="colorArr" />
 </template>
 
 <script setup>
@@ -15,7 +19,7 @@ import Home from "./views/Home.vue";
 import { ref, watchEffect, toRaw, computed } from "vue";
 import { fetchData } from "./composables/tmdb";
 import { useRouter } from "vue-router";
-
+import { colorArr } from "./composables/colorPalette";
 const router = useRouter();
 
 const fieldNames = ref(["Popular Movies", "Popular TV Series"]);
@@ -40,7 +44,7 @@ watchEffect(async () => {
 <style>
 #app {
   font-family: Arial, sans-serif;
-  min-height: 100%; 
+  min-height: 100%;
   min-width: 100%;
   display: flex;
   flex-direction: column;
