@@ -8,7 +8,11 @@
           :key="index"
           class="movie-card"
         >
-          <ProductCard :movie="movie"> </ProductCard>
+          <ProductCard
+            :movie="movie"
+            :contentType="props.header === 'Popular Movies' ? 'movie' : 'tv'"
+          >
+          </ProductCard>
         </div>
       </div>
     </div>
@@ -160,7 +164,7 @@ const props = defineProps(["movies", "header"]);
   bottom: 0;
   display: flex;
   background-color: rgba(168, 0, 194, 0.198);
-  opacity: 1; 
+  opacity: 1;
   transition: opacity 0.3s ease;
 }
 </style>

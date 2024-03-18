@@ -1,34 +1,49 @@
 <template>
-  <div v-if="movie" class="movie-card">
-    <div class="imdb-button">{{ movie.vote_average.toFixed(1) }} / 10</div>
-    <img
-      :src="`${startUrl}${movie.poster_path}`"
-      :alt="`{{ movie.name ? movie.name : movie.title }} poster`"
-      class="movie-poster"
-    />
-    <div class="movie-info-overlay">
-      <div class="movie-info">
-        <h1 class="movie-title">{{ movie.name ? movie.name : movie.title }}</h1>
+    <div
+      v-if="movie"
+      class="movie-card"
+      @click="handleClick(movie.id, props.contentType)"
+    >
+      <div class="imdb-button">{{ movie.vote_average.toFixed(1) }} / 10</div>
+      <img
+        :src="`${startUrl}${movie.poster_path}`"
+        :alt="`{{ movie.name ? movie.name : movie.title }} poster`"
+        class="movie-poster"
+      />
+      <div class="movie-info-overlay">
+        <div class="movie-info">
+          <h1 class="movie-title">
+            {{ movie.name ? movie.name : movie.title }}
+          </h1>
+        </div>
       </div>
     </div>
-  </div>
-  <div v-else style="text-align: center; width: 30%;">
-    <p>Loading...</p>
-  </div>
+    <div v-else style="text-align: center; width: 30%">
+      <p>Loading...</p>
+    </div>
+    
 </template>
 <script setup>
-import { watchEffect } from 'vue';
+import { ref } from "vue";
+import { fetchMovieDetails, fetchCasting } from "../composables/tmdb";
 
-const props = defineProps(["movie"]);
+const props = defineProps(["movie", "contentType"]);
 const startUrl = "https://image.tmdb.org/t/p/original";
+const movieDetails = ref({});
+const movieCasting = ref({});
 
-watchEffect(() => {
-  if (props.movie !== undefined) {
-    /*empty*/
-  } else {
-    /*empty*/
+const handleClick = async (contentId, contentType) => {
+  try {
+    movieDetails.value = await fetchMovieDetails(contentId, contentType);
+    movieCasting.value = await fetchCasting(contentId, contentType);
+    console.log(movieCasting.value);
+    console.log(movieDetails.value);
+    // Navigate to a new route with movie details
+  } catch (error) {
+    console.error("Error fetching movie details or casting:", error);
   }
-});
+};
+
 </script>
 
 <style scoped>
@@ -107,8 +122,17 @@ watchEffect(() => {
   right: 0;
   bottom: 0;
   display: flex;
-  background-color: rgba(168, 0, 194, 0.198); 
-  opacity: 1; 
+  background-color: rgba(168, 0, 194, 0.198);
+  opacity: 1;
   transition: opacity 0.3s ease;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  z-index: 999; /* Ensure it's on top of other content */
 }
 </style>

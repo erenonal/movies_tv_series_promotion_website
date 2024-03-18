@@ -34,7 +34,7 @@ async function fetchData(pageNumber = 1) {
       }
     }
 
-    pageNumber = 1; 
+    pageNumber = 1;
 
     while (!foundHighRatingMovie) {
       const movieUrl = `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${pageNumber}&api_key=${apiKey}`;
@@ -64,23 +64,39 @@ async function fetchData(pageNumber = 1) {
   }
 }
 
-export { fetchData };
 
-
-// Veriyi cagirdigin yerde idisini alip buna gonder oyle casting gelsin
-export function fetchCasting() {
-  const url = `https://api.themoviedb.org/3/tv/94722/aggregate_credits?language=en-US&api_key=${apiKey}`;
-  return axios.get(url, options);
-}
-
-// Example usage:
-(async () => {
+const fetchCasting = async (movieId, contentType) => {
   try {
-    const { movie } = await fetchData();
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/${contentType}/${movieId}/credits?language=en-US&api_key=${apiKey}`
+    );
+    // console.log(response.data);
+
+    return response.data.cast;
   } catch (error) {
-    console.error("Error:", error);
+    console.error("Error fetching movie details:", error);
   }
-})();
+};
+
+const fetchMovieDetails = async (movieId, contentType) => {
+  try {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/${contentType}/${movieId}`,
+      {
+        params: {
+          api_key: apiKey,
+          language: "en-US",
+        },
+      }
+    );
+    // console.log(response.data)
+        return response.data;
+
+  } catch (error) {
+    console.error("Error fetching movie details:", error);
+  }
+};
+export { fetchData, fetchMovieDetails, fetchCasting };
 
 //name
 //poster
@@ -90,12 +106,3 @@ export function fetchCasting() {
 //production company
 //rating
 //cast images
-
-//original_name
-//poster_path
-//first_air_date
-//genre_ids
-
-//vote_average
-
-//id

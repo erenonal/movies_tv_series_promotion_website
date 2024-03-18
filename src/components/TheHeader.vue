@@ -16,7 +16,11 @@
       </nav>
     </div>
     <div class="row movie-card">
-      <ProductCard v-if="ctx.movie" :movie="ctx.movie[randomIndexMovie]">
+      <ProductCard
+        v-if="ctx.movie"
+        :movie="ctx.movie[randomIndexMovie]"
+        :contentType="contentType[0]"
+      >
       </ProductCard>
       <div v-else>Loading</div>
       <div class="column header-motto">
@@ -25,7 +29,12 @@
           <span class="bold-text">World of TV Series & Movies</span>
         </p>
       </div>
-      <ProductCard v-if="ctx.tv" :movie="ctx.tv[randomIndexTv]"> </ProductCard>
+      <ProductCard
+        v-if="ctx.tv"
+        :movie="ctx.tv[randomIndexTv]"
+        :contentType="contentType[1]"
+      >
+      </ProductCard>
       <div v-else>Loading</div>
     </div>
   </header>
@@ -34,9 +43,9 @@
 <script setup>
 import { onMounted, reactive, defineProps, ref, watch, watchEffect } from "vue";
 import ProductCard from "/src/components/ProductCard.vue";
-const isNavbarFixed = ref(false); 
-
+const isNavbarFixed = ref(false);
 const props = defineProps(["ids", "popularMoviesAndSeries"]);
+const contentType = ["movie", "tv"];
 const ctx = ref({});
 let randomIndexMovie = ref(0);
 let randomIndexTv = ref(0);
@@ -107,7 +116,7 @@ header::before {
 }
 
 .fixed {
-  width: 50%;
+  width: 90%;
   border-radius: 6px;
   margin: 2rem;
   top: 0;
@@ -119,8 +128,8 @@ header::before {
   color: black;
   position: fixed;
   top: 0;
-  z-index: 1000; 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(20px);
 }
 
@@ -189,4 +198,5 @@ nav button:first-child {
 .bold-text {
   font-weight: bold;
 }
+
 </style>
