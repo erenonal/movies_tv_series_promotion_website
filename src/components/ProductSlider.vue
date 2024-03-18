@@ -5,7 +5,6 @@
       '--vitalen-primary': props.colorArr['vitalen-dark-5'],
       '--vitalen-secondary': props.colorArr['vitalen-light-1'],
       '--vitalen-white': props.colorArr['vitalen-white'],
-      '--vitalen-opac-indigo': props.colorArr['vitalen-opac-indigo'],
     }"
   >
     <h1 class="main-header">{{ props.header }}</h1>

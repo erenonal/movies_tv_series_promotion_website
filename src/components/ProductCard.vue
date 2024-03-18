@@ -133,7 +133,7 @@ const handleClick = async (contentId, contentType) => {
 }
 @media (max-width:768px) {
 .movie-info-overlay {
-  background-color: var(--vitalen-primary);
+  background-color: var(--vitalen-primary) !important;
   opacity: .9;
 }
   

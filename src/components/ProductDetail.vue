@@ -4,7 +4,6 @@
     :style="{
       '--vitalen-primary': colorArr['vitalen-dark-5'],
       '--vitalen-var(--vitalen-white)': colorArr['vitalen-var(--vitalen-white)'],
-      '--vitalen-opac-indigo': colorArr['vitalen-opac-indigo'],
     }"
   >
     <div class="closeButtonContainer">
