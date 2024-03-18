@@ -95,12 +95,3 @@ const fetchMovieDetails = async (movieId, contentType) => {
   }
 };
 export { fetchData, fetchMovieDetails, fetchCasting };
-
-//name
-//poster
-//description
-//release date
-//genres
-//production company
-//rating
-//cast images

@@ -131,5 +131,10 @@ const goBack = () => {
 .closeButtonContainer {
   position: relative;
   width: 100%;
+}@media (max-width: 768px) {
+  .product-detail-header h1 {
+  text-align: center;
+  font-size: 2rem;
+}
 }
 </style>

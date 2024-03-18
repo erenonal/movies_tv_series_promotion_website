@@ -30,15 +30,15 @@ const context = ref("");
 
 @media (max-width: 768px) {
   .content-container {
-    scale: 0.75;
+    scale: 0.5;
   }
   .text-row,
   .context-row p {
     text-align: center;
     color: white;
     font-weight: 900;
-    white-space: nowrap; /* Prevent text from wrapping */
-    overflow: hidden; /* Hide any overflow */
+    white-space: nowrap; 
+    overflow: hidden; 
   }
 }
 .image-row {
@@ -55,6 +55,6 @@ const context = ref("");
   text-align: center;
   color: white;
   font-weight: 900;
-  white-space: nowrap; /* Prevent text from wrapping */
+  white-space: nowrap; 
 }
 </style>

@@ -7,8 +7,12 @@
     }"
   >
     <div style="backdrop-filter: blur(5px); min-height: 100vh">
-      <div v-if="movieDetails" class="banner">
-        <div class="column">{{ movieDetails.name }}</div>
+      <div v-if="movieDetails" class="banner" ref="bannerElement">
+        <div class="column">
+          <p>
+            {{ movieDetails.name }}
+          </p>
+        </div>
       </div>
       <div class="detail-container">
         <div class="detail-item">
@@ -76,7 +80,14 @@
 </template>
 
 <script setup>
-import { defineProps, ref, onMounted, watchEffect } from "vue";
+import {
+  defineProps,
+  ref,
+  onMounted,
+  watchEffect,
+  onBeforeUnmount,
+  watch,
+} from "vue";
 import CastSlider from "./CastSlider.vue"; // Import your component here
 import { colorArr } from "../composables/colorPalette";
 const props = defineProps(["movieDetails", "movieCasting"]);
@@ -92,10 +103,8 @@ function setBannerBackground() {
 
   if (bannerElement && bannerElementBackground && backdropPath) {
     bannerElement.style.backgroundImage = `linear-gradient(to top, rgba(0, 0, 0, 1) 0%, transparent 100%), url(${startUrl}/${backdropPath})`;
-    bannerElement.style.backgroundSize = "contain";
-    bannerElement.style.backgroundSize = "200%";
-    bannerElement.style.backgroundPosition = "30% 60%"; // 10% from the left and 50% from the top
-
+    bannerElement.style.backgroundSize = "cover";
+    bannerElement.style.backgroundPosition = "end";
     bannerElement.style.position = "relative";
     bannerElement.style.zIndex = "2";
     bannerElement.style.overflow = "hidden";
@@ -118,6 +127,35 @@ function formatDateWithSlashes(dateString) {
     /*empty*/
   }
 }
+const screenWidth = ref(window.innerWidth);
+const bannerElement = ref(null);
+
+console.log(screenWidth.value);
+const handleResize = () => {
+  screenWidth.value = window.innerWidth;
+};
+
+onMounted(() => {
+  window.addEventListener("resize", handleResize);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", handleResize);
+});
+
+watchEffect(() => {
+  if (bannerElement.value) {
+    if (screenWidth.value <= 768) {
+      console.log(bannerElement.value.style.backgroundSize);
+      bannerElement.value.style.backgroundSize = "100%";
+      bannerElement.value.style.backgroundPosition = "30% 60%";
+      console.log(bannerElement.value.style.backgroundSize);
+    } else {
+      bannerElement.value.style.backgroundSize = "";
+      bannerElement.value.style.backgroundPosition = "";
+    }
+  }
+});
 </script>
 
 <style scoped>
@@ -175,12 +213,10 @@ function formatDateWithSlashes(dateString) {
 }
 @media (max-width: 768px) {
   .detail-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto auto;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     margin: auto;
-    gap: 0;
   }
   .detail-item {
     font-size: 0.8rem;
@@ -232,6 +268,7 @@ function formatDateWithSlashes(dateString) {
   .slide {
     width: 10vh;
   }
+
 }
 .slider-container::-webkit-scrollbar {
   width: 10rem;

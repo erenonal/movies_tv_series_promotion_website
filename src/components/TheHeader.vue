@@ -182,7 +182,7 @@ nav button:first-child {
 @media (max-width: 768px) {
   .row {
     display: flex;
-    flex-wrap: nowrap; /* Ensure items stay in one row */
+    flex-wrap: nowrap; 
     scale: 0.7;
     margin-left: -3rem;
     margin-top: -2rem;

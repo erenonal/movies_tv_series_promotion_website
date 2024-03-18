@@ -16,6 +16,6 @@
 }
 @media (max-width: 768px) {
   .main-components {
-    margin: 0; /* Adjust the margins as needed */
+    margin: 0; 
   }
 }
