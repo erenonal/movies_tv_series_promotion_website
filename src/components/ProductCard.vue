@@ -131,6 +131,13 @@ const handleClick = async (contentId, contentType) => {
   opacity: 1;
   transition: opacity 0.3s ease;
 }
+@media (max-width:768px) {
+.movie-info-overlay {
+  background-color: var(--vitalen-primary);
+  opacity: .9;
+}
+  
+}
 .overlay {
   position: fixed;
   top: 0;

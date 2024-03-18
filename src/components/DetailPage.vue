@@ -92,8 +92,10 @@ function setBannerBackground() {
 
   if (bannerElement && bannerElementBackground && backdropPath) {
     bannerElement.style.backgroundImage = `linear-gradient(to top, rgba(0, 0, 0, 1) 0%, transparent 100%), url(${startUrl}/${backdropPath})`;
-    bannerElement.style.backgroundSize = "cover";
-    bannerElement.style.backgroundPosition = "end";
+    bannerElement.style.backgroundSize = "contain";
+    bannerElement.style.backgroundSize = "200%";
+    bannerElement.style.backgroundPosition = "30% 60%"; // 10% from the left and 50% from the top
+
     bannerElement.style.position = "relative";
     bannerElement.style.zIndex = "2";
     bannerElement.style.overflow = "hidden";
@@ -184,7 +186,7 @@ function formatDateWithSlashes(dateString) {
     font-size: 0.8rem;
     margin: 0;
     border-radius: 0 0 2rem 2rem;
-    scale: 0.9;
+    scale: 0.8;
   }
   .detail-container > div:nth-child(3) {
     grid-column: 1 / -1;
