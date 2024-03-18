@@ -88,7 +88,7 @@ import {
   onBeforeUnmount,
   watch,
 } from "vue";
-import CastSlider from "./CastSlider.vue"; // Import your component here
+import CastSlider from "./CastSlider.vue"; 
 import { colorArr } from "../composables/colorPalette";
 const props = defineProps(["movieDetails", "movieCasting"]);
 const startUrl = "https://image.tmdb.org/t/p/original";

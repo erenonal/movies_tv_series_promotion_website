@@ -135,6 +135,7 @@ const handleClick = async (contentId, contentType) => {
 .movie-info-overlay {
   background-color: var(--vitalen-primary) !important;
   opacity: .9;
+  z-index: 5;
 }
   
 }
