@@ -26,19 +26,19 @@
 <script setup>
 import { ref } from "vue";
 import { fetchMovieDetails, fetchCasting } from "../composables/tmdb";
+import { useRouter } from 'vue-router';
 
 const props = defineProps(["movie", "contentType"]);
 const startUrl = "https://image.tmdb.org/t/p/original";
 const movieDetails = ref({});
 const movieCasting = ref({});
+const router = useRouter();
 
 const handleClick = async (contentId, contentType) => {
   try {
     movieDetails.value = await fetchMovieDetails(contentId, contentType);
     movieCasting.value = await fetchCasting(contentId, contentType);
-    console.log(movieCasting.value);
-    console.log(movieDetails.value);
-    // Navigate to a new route with movie details
+    router.push({ name: 'movieDetails', params: { id: contentId , contentType: contentType } });
   } catch (error) {
     console.error("Error fetching movie details or casting:", error);
   }
@@ -72,7 +72,6 @@ const handleClick = async (contentId, contentType) => {
   font-size: 1.25rem;
 }
 .movie-card:hover {
-  /* box-shadow: 0px 10px 20px #000000; */
   transform: scale(1.08);
   border-radius: 10px 0px 10px 10px;
 }
@@ -132,7 +131,7 @@ const handleClick = async (contentId, contentType) => {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-  z-index: 999; /* Ensure it's on top of other content */
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 999; 
 }
 </style>

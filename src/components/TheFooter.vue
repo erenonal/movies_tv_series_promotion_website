@@ -17,19 +17,18 @@
 </template>
 
 <script setup>
-// No script setup logic required for this example
 </script>
 
 <style scoped>
 .footer {
-  background-color: #333;
+  background-color: crimson;
   color: #fff;
-  padding: 20px 0;
+  padding: 1rem 0;
   text-align: center;
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -39,6 +38,7 @@
 .left {
   flex: 1;
   text-align: start;
+  margin-left: 5rem ;
 }
 
 .right {
@@ -46,7 +46,8 @@
 }
 
 .column {
-  margin-left: 20px;
+  margin-left: 5rem;
+  margin-right: 5rem;
 }
 
 @media (max-width: 768px) {

@@ -70,7 +70,6 @@ const fetchCasting = async (movieId, contentType) => {
     const response = await axios.get(
       `https://api.themoviedb.org/3/${contentType}/${movieId}/credits?language=en-US&api_key=${apiKey}`
     );
-    // console.log(response.data);
 
     return response.data.cast;
   } catch (error) {
@@ -89,7 +88,6 @@ const fetchMovieDetails = async (movieId, contentType) => {
         },
       }
     );
-    // console.log(response.data)
         return response.data;
 
   } catch (error) {

@@ -94,7 +94,7 @@ header::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("/Users/eren/Desktop/vitalen/vitalen/src/assets/background_image.png");
+  background-image: url("/src/assets/background_image.png");
   background-size: cover;
   background-position: center;
   filter: hue-rotate(280deg);

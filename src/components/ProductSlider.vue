@@ -46,8 +46,6 @@ const props = defineProps(["movies", "header"]);
   content: "";
   height: 25vh;
   display: block;
-  /*  width: 100px;
- background: linear-gradient(to right, black, transparent); */
   position: absolute;
   left: 0;
   z-index: 1;
@@ -112,7 +110,6 @@ const props = defineProps(["movies", "header"]);
   font-size: 1.25rem;
 }
 .movie-card:hover {
-  /* box-shadow: 0px 10px 20px #000000; */
   transform: scale(1.08);
   border-radius: 10px 0px 10px 10px;
 }

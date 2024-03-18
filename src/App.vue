@@ -1,31 +1,28 @@
 <template>
-  <TheHeader
+  <Header
+    v-if="isHomePage"
     :ids="fieldNames"
     :popularMoviesAndSeries="highRatingContext"
-  ></TheHeader>
-  <div v-for="(fieldName, index) in fieldNames" :key="index">
-    <ProductSlider
-      :id="fieldName"
-      :movies="fieldName === 'Popular Movies' ? movies : tv"
-      :header="fieldName"
-    ></ProductSlider>
-  </div>
-  <TheFooter></TheFooter>
+  />
+    <router-view></router-view>
+  <Footer />
 </template>
 
 <script setup>
-import ProductSlider from "/src/components/ProductSlider.vue";
-import TheHeader from "/src/components/TheHeader.vue";
-import TheFooter from "/src/components/TheFooter.vue";
-import { ref, watchEffect,toRaw } from "vue"; 
-import { fetchData } from "/src/composables/tmdb";
+import Header from "./components/TheHeader.vue";
+import Footer from "./components/TheFooter.vue";
+import Home from "./views/Home.vue";
+import { ref, watchEffect, toRaw, computed } from "vue";
+import { fetchData } from "./composables/tmdb";
+import { useRouter } from "vue-router";
 
-// Define reactive variables
-const fieldNames = ["Popular Movies", "Popular TV Series"];
+const router = useRouter();
+
+const fieldNames = ref(["Popular Movies", "Popular TV Series"]);
 const movies = ref([]);
 const tv = ref([]);
-const highRatingContext = ref({
-});
+const highRatingContext = ref({});
+const isHomePage = computed(() => router.currentRoute.value.path === "/");
 
 watchEffect(async () => {
   try {
@@ -40,4 +37,13 @@ watchEffect(async () => {
 });
 </script>
 
-<style scoped></style>
+<style>
+#app {
+  font-family: Arial, sans-serif;
+  min-height: 100%; 
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+</style>
