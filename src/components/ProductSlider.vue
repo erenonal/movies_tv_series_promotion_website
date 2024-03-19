@@ -18,6 +18,7 @@
           <ProductCard
             :movie="movie"
             :contentType="props.header === 'Popular Movies' ? 'movie' : 'tv'"
+            @onclick="scrollToTop()"
           >
           </ProductCard>
         </div>
@@ -28,6 +29,13 @@
 <script setup>
 import ProductCard from "/src/components/ProductCard.vue";
 const props = defineProps(["movies", "header", "colorArr"]);
+
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+}
 </script>
 
 <style scoped>

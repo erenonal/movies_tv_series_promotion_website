@@ -19,7 +19,9 @@
           >
         </div>
         <div class="column">
-          <a href="https://github.com/erenonal/vitalen/" style="text-decoration: none"
+          <a
+            href="https://github.com/erenonal/vitalen/"
+            style="text-decoration: none"
             >Github</a
           >
         </div>
@@ -77,6 +79,5 @@ const props = defineProps(["colorArr"]);
     text-align: center;
     margin: auto;
   }
-
 }
 </style>

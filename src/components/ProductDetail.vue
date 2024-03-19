@@ -3,11 +3,12 @@
     class="product-detail"
     :style="{
       '--vitalen-primary': colorArr['vitalen-dark-5'],
-      '--vitalen-var(--vitalen-white)': colorArr['vitalen-var(--vitalen-white)'],
+      '--vitalen-var(--vitalen-white)':
+        colorArr['vitalen-var(--vitalen-white)'],
     }"
   >
     <div class="closeButtonContainer">
-      <div class="closeButtonIcon" @click="goBack">X</div>
+      <div class="closeButtonIcon" @click="goBack(movieDetails.id)">X</div>
     </div>
     <div class="product-detail-header">
       <h1>{{ movieDetails.name ? movieDetails.name : movieDetails.title }}</h1>
@@ -20,7 +21,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, defineEmits } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { fetchMovieDetails, fetchCasting } from "../composables/tmdb";
 import DetailPage from "/src/components/DetailPage.vue";
@@ -130,10 +131,11 @@ const goBack = () => {
 .closeButtonContainer {
   position: relative;
   width: 100%;
-}@media (max-width: 768px) {
-  .product-detail-header h1 {
-  text-align: center;
-  font-size: 2rem;
 }
+@media (max-width: 768px) {
+  .product-detail-header h1 {
+    text-align: center;
+    font-size: 2rem;
+  }
 }
 </style>

@@ -9,7 +9,9 @@
       '--vitalen-opac-indigo': colorArr['vitalen-opac-indigo'],
     }"
   >
-    <div class="imdb-button">{{ movie.vote_average.toFixed(1) }} / 10</div>
+    <div :id="movie.id" class="imdb-button">
+      {{ movie.vote_average.toFixed(1) }} / 10
+    </div>
     <img
       :src="`${startUrl}${movie.poster_path}`"
       :alt="`{{ movie.name ? movie.name : movie.title }} poster`"
@@ -28,7 +30,7 @@
   </div>
 </template>
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { fetchMovieDetails, fetchCasting } from "../composables/tmdb";
 import { useRouter } from "vue-router";
 import { colorArr } from "../composables/colorPalette";
@@ -40,6 +42,8 @@ const router = useRouter();
 
 const handleClick = async (contentId, contentType) => {
   try {
+    localStorage.setItem("clickedElementId", contentId);
+
     movieDetails.value = await fetchMovieDetails(contentId, contentType);
     movieCasting.value = await fetchCasting(contentId, contentType);
     router.push({
@@ -50,6 +54,18 @@ const handleClick = async (contentId, contentType) => {
     console.error("Error fetching movie details or casting:", error);
   }
 };
+
+const scrollToClickedElement = () => {
+  const clickedElementId = localStorage.getItem("clickedElementId");
+  if (clickedElementId) {
+    const clickedElement = document.getElementById(clickedElementId);
+    if (clickedElement) {
+      clickedElement.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+};
+
+onMounted(scrollToClickedElement);
 </script>
 
 <style scoped>
@@ -131,13 +147,11 @@ const handleClick = async (contentId, contentType) => {
   opacity: 1;
   transition: opacity 0.3s ease;
 }
-@media (max-width:768px) {
-.movie-info-overlay {
-  background-color: var(--vitalen-primary) !important;
-  opacity: .9;
-  z-index: 5;
-}
-  
+@media (max-width: 768px) {
+  .movie-info-overlay {
+    background-color: var(--vitalen-primary) !important;
+    z-index: 5;
+  }
 }
 .overlay {
   position: fixed;

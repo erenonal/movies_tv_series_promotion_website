@@ -37,8 +37,8 @@ const context = ref("");
     text-align: center;
     color: white;
     font-weight: 900;
-    white-space: nowrap; 
-    overflow: hidden; 
+    white-space: nowrap;
+    overflow: hidden;
   }
 }
 .image-row {
@@ -55,6 +55,6 @@ const context = ref("");
   text-align: center;
   color: white;
   font-weight: 900;
-  white-space: nowrap; 
+  white-space: nowrap;
 }
 </style>

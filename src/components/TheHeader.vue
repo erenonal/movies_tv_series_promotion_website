@@ -121,7 +121,7 @@ header::before {
 }
 
 .fixed {
-  width: 96%;
+  width: 93%;
   border-radius: 6px;
   margin: 2rem;
   top: 0;
@@ -182,7 +182,7 @@ nav button:first-child {
 @media (max-width: 768px) {
   .row {
     display: flex;
-    flex-wrap: nowrap; 
+    flex-wrap: nowrap;
     scale: 0.7;
     margin-left: -3rem;
     margin-top: -2rem;

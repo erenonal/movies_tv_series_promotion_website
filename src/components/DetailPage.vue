@@ -6,7 +6,7 @@
       '--vitalen-light': colorArr['vitalen-light-1'],
     }"
   >
-    <div style="backdrop-filter: blur(5px); min-height: 100vh">
+    <div id="detailPage" style="backdrop-filter: blur(5px); min-height: 100vh">
       <div v-if="movieDetails" class="banner" ref="bannerElement">
         <div class="column">
           <p>
@@ -32,16 +32,14 @@
         </div>
         <div class="detail-item">
           <div class="detail-item-subtitle">Status</div>
-          <div>
-            {{ movieDetails.status }}
-          </div>
+          <div>{{ movieDetails.status ? movieDetails.status : "-" }}</div>
         </div>
 
         <div
           v-if="movieDetails.production_companies !== undefined"
           class="detail-item"
         >
-          <div class="detail-item-subtitle">ProductionCompanie(s)</div>
+          <div class="detail-item-subtitle">ProductionCompanies</div>
 
           <div
             v-for="(prodCompany, index) in movieDetails.production_companies"
@@ -64,7 +62,7 @@
       </div>
       <div class="responsive-paragraph">
         <div class="cast-header">Overview</div>
-        <p>{{ movieDetails.overview }}</p>
+        <p>{{ movieDetails.overview ? movieDetails.overview : "-/10" }}</p>
       </div>
 
       <div class="cast-header">Cast</div>
@@ -88,7 +86,7 @@ import {
   onBeforeUnmount,
   watch,
 } from "vue";
-import CastSlider from "./CastSlider.vue"; 
+import CastSlider from "./CastSlider.vue";
 import { colorArr } from "../composables/colorPalette";
 const props = defineProps(["movieDetails", "movieCasting"]);
 const startUrl = "https://image.tmdb.org/t/p/original";
@@ -124,13 +122,13 @@ function formatDateWithSlashes(dateString) {
       return dateString;
     }
   } catch {
+    return "Unknown";
     /*empty*/
   }
 }
 const screenWidth = ref(window.innerWidth);
 const bannerElement = ref(null);
 
-console.log(screenWidth.value);
 const handleResize = () => {
   screenWidth.value = window.innerWidth;
 };
@@ -146,15 +144,18 @@ onBeforeUnmount(() => {
 watchEffect(() => {
   if (bannerElement.value) {
     if (screenWidth.value <= 768) {
-      console.log(bannerElement.value.style.backgroundSize);
       bannerElement.value.style.backgroundSize = "100%";
       bannerElement.value.style.backgroundPosition = "30% 60%";
-      console.log(bannerElement.value.style.backgroundSize);
     } else {
       bannerElement.value.style.backgroundSize = "";
       bannerElement.value.style.backgroundPosition = "";
     }
   }
+});
+onMounted(() => {
+  document.getElementById("detailPage").scrollIntoView({
+    behavior: "smooth",
+  });
 });
 </script>
 
@@ -268,7 +269,6 @@ watchEffect(() => {
   .slide {
     width: 10vh;
   }
-
 }
 .slider-container::-webkit-scrollbar {
   width: 10rem;
